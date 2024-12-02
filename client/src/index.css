@@ -20,9 +20,13 @@
   appearance: none;
   width: 30px;
   height: 30px;
-  background-image: url('/client/public/slide_icon.svg');
+  background-image: url('/slide_icon.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
+}
+
+.bg-layer {
+  background-image: url('/bg_layer.png');
 }
