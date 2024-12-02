@@ -9,6 +9,7 @@ const Testimonials = () => {
         Customer Testiomonials
       </h1>
 
+      {/* Testimonials */}
       <div className='grid gird-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto px-4 py-8 '>
         {testimonialsData.map((testimonial, index) => (
           <div

@@ -20,6 +20,7 @@ const Header = () => {
           <br className='max-sm:hidden' />
           easy to create transparent or customized images in just a few clicks.
         </p>
+        {/* Upload button */}
         <div>
           <input type='file' name='' id='uploadImage' hidden />
           <label
