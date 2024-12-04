@@ -1,15 +1,22 @@
 import { createContext, useState } from 'react';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser, useClerk } from '@clerk/clerk-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const [credits, setCredits] = useState(false);
   const [image, setImage] = useState(false);
+  const [resultImage, setResultImage] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const { getToken } = useAuth();
+  const { isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
+
+  const navigate = useNavigate();
 
   const loadCredits = async () => {
     try {
@@ -29,6 +36,16 @@ const AppContextProvider = (props) => {
 
   const removeBg = async (imageFile) => {
     try {
+      if (!isSignedIn) {
+        // open sign in pop up component
+        return openSignIn;
+      }
+
+      setImage(imageFile);
+      setResultImage(false);
+
+      // send user to result page
+      navigate('/result');
     } catch (error) {
       console.log(error);
       toast.error(error.message);
