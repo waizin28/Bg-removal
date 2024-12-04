@@ -5,9 +5,13 @@ import Result from './pages/Result';
 import BuyCredit from './pages/BuyCredit';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   return (
     <div className='min-h-screen bg-slate'>
+      <ToastContainer position='bottom-right' />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

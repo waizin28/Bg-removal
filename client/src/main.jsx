@@ -3,7 +3,7 @@ import './index.css';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
-
+import AppContextProvider from './context/AppContext';
 // Import clerk key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -17,7 +17,9 @@ createRoot(document.getElementById('root')).render(
       publishableKey={PUBLISHABLE_KEY}
       signInFallbackRedirectUrl='/'
     >
-      <App />
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
     </ClerkProvider>
   </BrowserRouter>
 );

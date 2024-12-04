@@ -30,7 +30,7 @@ const clerkWebHooks = async (req, res) => {
         };
 
         await userModel.create(userData);
-        res.status(200).json({ sucess: true, message: 'User created' });
+        res.status(200).json({ success: true, message: 'User created' });
         break;
       }
       case 'user.updated': {
@@ -43,14 +43,14 @@ const clerkWebHooks = async (req, res) => {
         };
 
         await userModel.findOneAndUpdate({ clerkId: data.id }, userData);
-        res.status(200).json({ sucess: true, message: 'User updated' });
+        res.status(200).json({ success: true, message: 'User updated' });
 
         break;
       }
       case 'user.deleted': {
         // delete user in database
         await userModel.findOneAndDelete({ clerkId: data.id });
-        res.status(200).json({ sucess: true, message: 'User deleted' });
+        res.status(200).json({ success: true, message: 'User deleted' });
         break;
       }
       default:
@@ -58,7 +58,7 @@ const clerkWebHooks = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    res.status(400).json({ sucess: false, message: error.message });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
@@ -67,10 +67,10 @@ const userCredits = async (req, res) => {
   try {
     const { clerkId } = req.body;
     const userData = await userModel.findOne({ clerkId });
-    res.status(200).json({ sucess: true, credits: userData.creditBalance });
+    res.status(200).json({ success: true, credits: userData.creditBalance });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json({ sucess: false, message: error.message });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
