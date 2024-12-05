@@ -46,6 +46,30 @@ const AppContextProvider = (props) => {
 
       // send user to result page
       navigate('/result');
+
+      const token = await getToken();
+      const formData = new FormData();
+      imageFile && formData.append('image', imageFile);
+
+      const { data } = await axios.post(
+        `${backendUrl}/api/image/remove-bg`,
+        formData,
+        {
+          headers: { token },
+        }
+      );
+
+      if (data.success) {
+        setResultImage(data.resultImage);
+        data.creditBalance && setCredits(data.creditBalance);
+      } else {
+        toast.error(data.message);
+        data.creditBalance && setCredits(data.creditBalance);
+        // Navigate to credit purchase page
+        if (data.creditBalance <= 0) {
+          navigate('/buy');
+        }
+      }
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -60,6 +84,8 @@ const AppContextProvider = (props) => {
     image,
     setImage,
     removeBg,
+    resultImage,
+    setResultImage,
   };
 
   return (

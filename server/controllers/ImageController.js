@@ -25,7 +25,6 @@ const removeBackground = async (req, res) => {
     }
 
     const imagePath = req.file.path;
-
     // Reading image file
     // store file using this path
     const imageFile = fs.createReadStream(imagePath);
@@ -57,11 +56,12 @@ const removeBackground = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      image: resultImage,
+      resultImage: resultImage,
       creditBalance: user.creditBalance - 1,
       message: 'Background removed successfully',
     });
   } catch (error) {
+    console.log('error', error);
     console.log(error.message);
     res.status(500).json({ success: false, message: error.message });
   }
